@@ -1,0 +1,32 @@
+#
+#	Ccode
+#
+#	(C) 2017-2020 HuyLe <anhhuy@live.com>
+#
+#	15-March-2017 <anhhuy@live.com>
+#
+
+CC      = gcc
+CFLAGS  = -W -Wall -Wshadow -Wstrict-prototypes -Wpointer-arith -Wcast-qual \
+          -Wcast-align -Wwrite-strings -Wmissing-prototypes -Winline -Wundef
+
+# When debugging, disable -O2 and enable -g.
+CFLAGS += -O2
+#CFLAGS += -g
+
+TARGET  = ccode
+PREFIX  = /usr/local
+
+all : $(TARGET)
+
+$(TARGET) : ccode.c
+	$(CC) $(CFLAGS) $< -o $@
+
+install : $(TARGET)
+	install -m 755 $(TARGET) $(PREFIX)/sbin
+
+uninstall :
+	rm -f $(PREFIX)/sbin/$(TARGET)
+
+clean :
+	rm -f $(TARGET) 
